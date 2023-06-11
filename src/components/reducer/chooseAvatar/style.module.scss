@@ -1,0 +1,86 @@
+@import '../../../scss/abstract.scss';
+
+.avatar {
+    background: #F5F5F5;
+    &__container {
+        padding:87px 15px 176px;
+        background: #FFFFFF;
+        box-sizing: border-box;
+    }
+    &__controllers {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 34px 34px 20px;
+
+        .controllers {
+            &__title {
+                font-weight: 500;
+                font-size: 12px;
+                line-height: 14px;
+                color: #A4A5AE;
+                min-width: 20%;
+            }
+            &__back {
+                max-width: 15px;
+                max-height: 15px;
+                border: none;
+                background-color: white;
+            }
+
+            &__save {
+                max-width: 15px;
+                max-height: 15px;
+                border: none;
+                background-color: white;
+            }
+        }
+    }
+    &__underline {
+        max-width: 40vw;
+        width: 100%;
+        min-height: 8px;
+        background: #232323;
+        margin: 0 auto;
+        -webkit-border-radius: 50px;
+        -moz-border-radius: 50px;
+        border-radius: 50px;
+        margin-bottom: 4px;
+    }
+}
+
+.photo {
+    &__selected {
+        max-width: 96px;
+        min-height: 96px;
+        background-color: black;
+        border-radius: 50%;
+        margin: 0 auto;
+        margin-bottom: 12px;
+    }
+    &__title {
+        display: inline-block;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 135%;
+        text-align: center;
+        color: #51515A;
+        margin-bottom: 12px;
+    }
+    &__grid {
+        max-width: 350px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        margin: 0 auto;
+        gap: 10px;
+    }
+    &__item {
+        max-width: 75px;
+        min-height: 75px;
+        background-color: grey;
+        border-radius: 50%;
+    }
+}
+

@@ -1,0 +1,37 @@
+@import '../../scss/abstract.scss';
+
+.header {
+    &__container {
+        background-color: #232323;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 34px 31px 51px 27px;
+        gap: 205px;
+
+        -webkit-border-top-left-radius: 50px;
+        -webkit-border-top-right-radius: 50px;
+        -moz-border-radius-topleft: 50px;
+        -moz-border-radius-topright: 50px;
+        border-top-left-radius: 50px;
+        border-top-right-radius: 50px;
+    }
+    &__date {
+        font-weight: 600;
+        font-size: 17px;
+        line-height: 22px;
+        color: white;
+    }
+    &__icons{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        min-width: 74px;
+        &__item {
+            &:not(:last-child) {
+                margin-right: 9px;
+            }
+        }
+    }
+}
