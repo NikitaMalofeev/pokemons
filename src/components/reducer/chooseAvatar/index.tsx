@@ -3,23 +3,46 @@ import styles from "./style.module.scss";
 import arrow_icon from "../../../icons/arrow.svg";
 import mark_icon from "../../../icons/mark.svg";
 import axios from "axios";
+import { appendFile } from "fs";
+
+interface PokemonAvatar {
+    id: string;
+    name: string;
+    url: string;
+    imageSrc: string;
+}
 
 const Avatar = () => {
-
-    const [images, setImages] = useState([]);
+    const [images, setImages] = useState<PokemonAvatar[]>([]);
+    const [checkedPokemon, setCheckedPokemon] = useState<string>();
 
     
     const getPokemon = async () => {
-        const response = await axios.get('https://pokeapi.co/api/v2/pokemon/', {
+        const response = await axios.get<{
+            results: Array<Omit<PokemonAvatar, 'id'>>
+        }>('https://pokeapi.co/api/v2/pokemon/?limit=12', {
             headers: {
                 'Access-Control-Allow-Origin': "http://localhost:3000"
             }
         })
-        const data = await response.data
-        console.log(data)
-        console.log('test')
+        const data = await response.data.results.map(pokemon => {
+            //достаю id покемонов чтобы получить полную ссылку на всех покемонов
+            const parts = pokemon.url.split('/'); // ['https:', '', 'pokeapi.co', 'api', 'v2', 'ability', '1', ''];
+            const id = parts[parts.length - 2];
+
+            const imageSrc = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${id}.png`
+
+            return {
+                ...pokemon,
+                id,
+                imageSrc
+            };
+        });
+
+        setImages(data);
     }
     getPokemon()
+
 
     return <div className={styles.avatar}>
                 <div className={styles.avatar__container}>
@@ -33,15 +56,17 @@ const Avatar = () => {
                         </button>
                     </div>
                     <div className={styles.photo__area}>
-                        <div className={styles.photo__selected}></div>
-                        <span className={styles.photo__title}>Выберите фото кота</span>
+                        <div className={styles.photo__selected}>
+                           {checkedPokemon 
+                            ? <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${checkedPokemon}.png`} className={styles.photo__avatar}/>
+                            : <div>Loading...</div>
+                           }
+                        </div>
+                        <span className={styles.photo__title}>Выберите своего покемона</span>
                         <div className={styles.photo__grid} id="photo__grid">
-                            <div className={styles.photo__item}>
-                                <img src="" alt="" className={styles.photo__pokemon}/>
-                                {images.map((url) => {
-                                    return <img src="" alt="" />
-                                })}
-                            </div>
+                                {images.map((item) => (
+                                    <img src={item.imageSrc} onClick={() => setCheckedPokemon(item.id)} alt={item.name} className={`${styles.photo__item} ${checkedPokemon === item.id && styles["photo__item--checked"]}`} />
+                                ))}
                         </div>
                     </div>
                 </div>

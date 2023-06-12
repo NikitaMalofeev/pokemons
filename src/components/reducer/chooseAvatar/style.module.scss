@@ -13,6 +13,8 @@
         justify-content: space-between;
         align-items: center;
         padding: 34px 34px 20px;
+        max-width: 50%;
+        margin: 0 auto;
 
         .controllers {
             &__title {
@@ -53,11 +55,18 @@
 .photo {
     &__selected {
         max-width: 96px;
-        min-height: 96px;
-        background-color: black;
+        max-height: 96px;
+        background-color: white;
         border-radius: 50%;
         margin: 0 auto;
-        margin-bottom: 12px;
+    }
+    &__avatar {
+        display: block;
+        max-width: 96px;
+        max-height: 96px;
+        background-color: white;
+        border-radius: 50%;
+        border: 1px solid grey;
     }
     &__title {
         display: inline-block;
@@ -81,6 +90,10 @@
         min-height: 75px;
         background-color: grey;
         border-radius: 50%;
+    }
+
+    &__item--checked {
+        border: 5px solid violet;
     }
 }
 
